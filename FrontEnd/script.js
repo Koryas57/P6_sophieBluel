@@ -1,7 +1,10 @@
 // Conteneur parent
 const gallery = document.querySelector(".gallery");
 const catContainer = document.querySelector(".filters");
+// Création d'un tableau pour accueillir les travaux
 let allWorks = [];
+// Création d'un tableau pour accueillir les catégories
+let categoryTab = [];
 
 // ***** AFFICHAGE DYNAMIQUE DE LA GALLERIE *****
 
@@ -42,9 +45,6 @@ const galleryDisplay = async () => {
 galleryDisplay();
 
 // ***** AFFICHAGE DYNAMIQUE DES BOUTONS FILTRES *****
-
-// Création d'un tableau pour accueillir les catégories
-let categoryTab = [];
 
 // Création de la fonction asynchrone qui va récupérer les données [catégories] depuis l'API
 const filterDisplay = async () => {

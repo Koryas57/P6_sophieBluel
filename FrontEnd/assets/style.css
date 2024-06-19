@@ -277,6 +277,11 @@ li:hover {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+#contact a {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
 
 input[type="submit"] {
   font-family: "Syne";
