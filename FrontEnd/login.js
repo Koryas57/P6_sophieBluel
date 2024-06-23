@@ -3,9 +3,6 @@ const logIn = async () => {
   // Liaison de la valeur des input du formulaire à des constantes
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
-  // Test de fonctionnement
-  console.log(email);
-  console.log(password);
 
   // Tentative d'envoi des données du formulaire via la requête POST
   try {
@@ -52,7 +49,7 @@ const logIn = async () => {
   }
 };
 
-const submit = document.querySelector("form");
+const submit = document.querySelector("section #login-form");
 // Positionnement d'un écouteur d'événements sur le bouton Submit du formulaire
 submit.addEventListener("submit", async function (event) {
   // On empêche la page de se recharger par défaut au clic sur Submit

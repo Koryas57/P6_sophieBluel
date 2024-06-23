@@ -1,6 +1,11 @@
 // Conteneur parent
 const gallery = document.querySelector(".gallery");
 const catContainer = document.querySelector(".filters");
+// Log
+const log = document.querySelector("#log a");
+// Mode édition
+const modeEdition = document.querySelector(".edition");
+const modifier = document.getElementById("modifier");
 // Création d'un tableau pour accueillir les travaux
 let allWorks = [];
 // Création d'un tableau pour accueillir les catégories
@@ -133,3 +138,43 @@ const filters = (filtersCategoryId) => {
 };
 
 filters();
+
+const checkConnectionStatus = () => {
+  let connected = false;
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    connected = true;
+    log.innerHTML = "logout";
+    log.href = "index.html";
+    log.style.cursor = "pointer";
+    catContainer.style.display = "none";
+    modeEdition.style.height = "5.5vh";
+    modifier.style.visibility = "visible";
+  } else {
+    log.innerHTML = "login";
+    log.href = "login.html";
+    modifier.style.visibility = "hidden";
+    catContainer.style.display = "flex";
+    modeEdition.style.height = "0";
+  }
+
+  return connected;
+};
+
+const toggleConnection = () => {
+  let connected = checkConnectionStatus();
+
+  if (connected) {
+    localStorage.removeItem("token");
+    window.location.href = log.href; // Utiliser log.href pour assurer la cohérence de la destination
+  } else {
+    window.location.href = "login.html"; // Redirection directe vers la page de connexion
+  }
+};
+
+log.addEventListener("click", toggleConnection);
+
+document.addEventListener("DOMContentLoaded", () => {
+  checkConnectionStatus();
+});
