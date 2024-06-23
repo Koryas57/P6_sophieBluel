@@ -139,6 +139,7 @@ const filters = (filtersCategoryId) => {
 
 filters();
 
+// Partie à retravailler
 const checkConnectionStatus = () => {
   let connected = false;
   const token = localStorage.getItem("token");
