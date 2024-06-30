@@ -32,7 +32,7 @@
               >login</a
             >
           </li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          <li><i class="fa-brands fa-instagram fa-xl"></i></li>
         </ul>
       </nav>
     </header>
@@ -61,12 +61,59 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
-        <button class="edit" id="edit-works" aria-hidden="true">
-          <p id="modifier">
-            <i class="fa-regular fa-pen-to-square"></i> modifier
-          </p>
-        </button>
+        <div class="flex">
+          <h2>Mes Projets</h2><p class="edit" id="modifier">
+            <a href="#modal1" class="js-modal">
+              <i class="fa-regular fa-pen-to-square"></i> modifier
+            </p>
+          </a>
+        </div>
+
+        <!--  PARTIE MODALE  -->
+        <aside
+          id="modal1"
+          class="modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="titlemodal"
+          style="display: none"
+        >
+          <div class="modal-wrapper js-modal-stop">
+            <button class="js-modal-close">
+              <i class="fa-solid fa-xmark fa-xl"></i>
+            </button>
+            <h2 id="titlemodal">Galerie photo</h2>
+            <div class="modal-gallery"></div>
+            <hr />
+            <div class="addWorkButton">
+              <a href="#modal2" class="modale-button" id="modal2Link">Ajouter une photo</a>
+            </div>
+          </div>
+          <!-- Modale 2 -->
+          <div class="modal-wrapper2 js-modal-stop">
+            <button class="js-modal-close">
+              <i class="fa-solid fa-xmark fa-xl"></i>
+          </button>
+          <button class="js-modal-prev">
+          <i class="fa-solid fa-arrow-left fa-xl"></i>
+          </button>
+          <h2 id="titlemodal">Ajout Photo</h2>
+          <button id="addFileBtn">
+              <i class="fa-regular fa-image"></i>
+              <input type="file" name="+ Ajouter photo" id="addFile">
+              <p>jpg, png : 4mo max</p>
+              </button>
+              <label for="title">Titre</label>
+              <input type="text" name="title" id="title" />
+              <label for="category">Catégorie</label>
+              <input type="select" name="category" id="category" />
+              <hr/>
+              <a href="#" class="modale-button">Valider</a>
+              </div>
+          </div>
+        </aside>
+        <!--  FIN DE LA MODALE  -->
         <div class="filters"></div>
         <div class="gallery"></div>
       </section>
@@ -93,5 +140,7 @@
       </nav>
     </footer>
     <script src="./script.js"></script>
+    <script src="./app.js"></script>
+    <script src="./modal-gallery.js"></script>
   </body>
 </html>

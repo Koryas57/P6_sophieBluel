@@ -134,7 +134,7 @@ body {
   padding: 0 10%;
   font-family: "Work Sans";
   font-size: 14px;
-  background-color: #fdfaef;
+  background-color: #fffef8;
 }
 header {
   display: flex;
@@ -184,6 +184,7 @@ nav li {
 li:hover {
   color: #b1663c;
 }
+
 #introduction {
   display: flex;
   align-items: center;
@@ -209,19 +210,22 @@ li:hover {
 }
 #portfolio h2 {
   text-align: center;
+  margin: 65px 0 0 0;
   margin-bottom: 1em;
 }
 
 /*bouton modifier*/
-.edit {
+.flex {
   display: flex;
-  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit {
   position: relative;
-  background: 0;
-  border: 0;
+  top: 20px;
+  padding-left: 10px;
   cursor: pointer;
-  padding: 0;
-  z-index: 1;
 }
 
 .edit i {
@@ -234,15 +238,22 @@ li:hover {
   left: 60%;
 }
 
-/*Banner edition */
+.js-modal {
+  text-decoration: none;
+  color: #000000;
+}
+
+/*Admin editor mode */
 .edition {
-  transition-duration: 2s;
+  transition-duration: 1.2s;
+  transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   background-color: black;
   width: 100%;
   height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: fadeIn 2.2s both;
 }
 .edition p {
   color: white;
@@ -253,6 +264,173 @@ li:hover {
   margin-right: 6%;
 }
 
+/* Modale style */
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.4s both;
+}
+
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  width: 800px;
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 20px);
+  padding: 20px 100px;
+  background-color: #fff;
+  animation: slideFromTop 0.58s both cubic-bezier(0.47, 1.56, 0.5, 0.75);
+  border-radius: 15px;
+}
+
+.modal-wrapper2 {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  width: 800px;
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 20px);
+  padding: 20px 100px;
+  background-color: #fff;
+  animation: slide 0.58s both cubic-bezier(0.47, 1.56, 0.5, 0.75);
+  border-radius: 15px;
+}
+
+.modal-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.modal-gallery img {
+  scale: 1.7;
+  width: 76.86px;
+  height: 102.57px;
+  position: relative;
+  padding: 50px 30px;
+}
+
+.modal[aria-hidden="true"] {
+  animation: fadeOut 0.6s both;
+}
+
+.modal[aria-hidden="true"] .modal-wrapper {
+  animation: slideBackToTop 0.6s both;
+}
+
+.addWorkButton {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+}
+
+#titlemodal {
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 29px;
+  color: #000000;
+  line-height: 30.5px;
+}
+
+.modal-wrapper button {
+  background-color: transparent;
+  border: none;
+  scale: 1.75;
+}
+
+.js-modal-prev {
+  position: relative;
+  top: 10px;
+  left: -55%;
+}
+
+.js-modal-close {
+  position: relative;
+  top: 26px;
+  left: 55%;
+}
+
+.modal-wrapper a:hover {
+  transform: scale(1.2);
+  transition: all 0.3s;
+}
+
+.fa-xmark:hover {
+  transform: rotate(45deg) scale(1.5) rotate(45deg);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.fa-arrow-left:hover {
+  transform: translateX(-5px) rotateY(-40deg) scale(1.6);
+  transition: all 0.3s;
+}
+
+.fa-trash-can {
+  color: white;
+  background-color: black;
+  z-index: 5;
+}
+
+.fa-trash-can:hover {
+  transform: scale(1.2) rotate(360deg);
+  transition: all 0.3s;
+}
+
+.lien-logo {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset-area: center;
+}
+
+.logoDelete-style {
+  position: relative;
+  left: -30px;
+  top: -165px;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.modale-button {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 250px;
+  text-align: center;
+  border-radius: 60px;
+  line-height: 43px;
+  text-decoration: none;
+}
+
+#addFileBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8f1f6;
+  width: 420px;
+  height: 169px;
+  border-radius: 3px;
+  margin: 100px;
+}
 /*Filters*/
 
 .filters {
@@ -337,7 +515,7 @@ input[type="submit"] {
   color: white;
   background-color: #1d6154;
   margin: 2em auto;
-  width: 180px;
+  width: 250px;
   text-align: center;
   border-radius: 60px;
 }
@@ -346,4 +524,51 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+}
+
+/** Animation modale **/
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: rotateY(360deg) skew(10deg);
+  }
+  top {
+    transform: rotateY(-360deg);
+  }
+}
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-500px) rotateY(360deg) skew(10deg);
+  }
+  top {
+    transform: translateY(0px) rotateY(-360deg);
+  }
+}
+@keyframes slideBackToTop {
+  from {
+    transform: translateY(0px) rotateY(-360deg);
+  }
+  to {
+    transform: translateY(-400px) rotateY(0deg);
+  }
 }

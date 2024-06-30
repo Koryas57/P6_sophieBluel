@@ -6,6 +6,7 @@ const log = document.querySelector("#log a");
 // Mode édition
 const modeEdition = document.querySelector(".edition");
 const modifier = document.getElementById("modifier");
+const titleSpacing = document.querySelector("#portfolio h2");
 // Création d'un tableau pour accueillir les travaux
 let allWorks = [];
 // Création d'un tableau pour accueillir les catégories
@@ -39,7 +40,7 @@ const galleryDisplay = async () => {
       gallery.appendChild(figElement);
 
       // Test de fonctionnement en cas d'erreur hors de la fonction
-      console.log("L'opération s'est bien déroulée");
+      console.log("=> Nombre de projets récupérés depuis l'API");
     }
   } catch {
     console.log("Il y a une erreur dans la fonction");
@@ -139,11 +140,13 @@ const filters = (filtersCategoryId) => {
 
 filters();
 
-// Partie à retravailler
+// Fonction qui va nous permettre de vérifier le statut de la connexion utilisateur
 const checkConnectionStatus = () => {
+  // On déclare l'état de base en tant que non connecté
   let connected = false;
+  // On vient récupérer le token d'authentification
   const token = localStorage.getItem("token");
-
+  // Si le token existe, on ajoute dynamiquement le mode édition sur la page d'accueil
   if (token) {
     connected = true;
     log.innerHTML = "logout";
@@ -152,7 +155,9 @@ const checkConnectionStatus = () => {
     catContainer.style.display = "none";
     modeEdition.style.height = "5.5vh";
     modifier.style.visibility = "visible";
+    // Si non, nous chargeons la page d'accueil simple
   } else {
+    titleSpacing.style.margin = "65px 0 65px 65px";
     log.innerHTML = "login";
     log.href = "login.html";
     modifier.style.visibility = "hidden";
@@ -163,6 +168,7 @@ const checkConnectionStatus = () => {
   return connected;
 };
 
+// On déclare une fonction qui va nous permettre de se déconnecter correctement
 const toggleConnection = () => {
   let connected = checkConnectionStatus();
 
@@ -170,10 +176,11 @@ const toggleConnection = () => {
     localStorage.removeItem("token");
     window.location.href = log.href; // Utiliser log.href pour assurer la cohérence de la destination
   } else {
-    window.location.href = "login.html"; // Redirection directe vers la page de connexion
+    window.location.href = "login.html"; // Redirection vers la page de connexion
   }
 };
 
+// On place un écouteur d'évenement sur le bouton logIn/logOut
 log.addEventListener("click", toggleConnection);
 
 document.addEventListener("DOMContentLoaded", () => {
