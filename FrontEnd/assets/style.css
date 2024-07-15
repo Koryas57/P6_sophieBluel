@@ -538,21 +538,15 @@ li:hover {
   line-height: 43px;
   text-decoration: none;
   z-index: 2;
-  transition: all 0.5s;
+  transition: all 0.8s;
 }
 
-.valider {
-  border-radius: 60px;
+.buttonEnabled {
   background-color: #1d6154;
-  color: white;
-  font-size: 14px;
-  margin-top: 30px;
-  margin-left: 220px;
-  width: 237px;
-  height: 36px;
+  cursor: pointer;
 }
-.validerDisabled {
-  background-color: #a7a7a7;
+.buttonDisabled {
+  background-color: #a7a7a7 !important;
   cursor: not-allowed;
 }
 

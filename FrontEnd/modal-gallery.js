@@ -6,6 +6,9 @@ const modalClose = document.querySelector(".js-modal-close");
 const token = localStorage.getItem("token");
 const imgPreview = document.querySelector("#preview");
 const fileUpload = document.querySelector(".file-upload");
+// Verifier répétitions des deux prochaines const
+const titleInput = document.getElementById('title');
+const categorySelector = document.getElementById('categorySelector');
 const modalButton2 = document.querySelector("#modale-button2");
 //URL de base qui est commune
 const BASE_URL = 'http://localhost:5678/api/';
@@ -216,21 +219,26 @@ const addToWorksData = (data, optionName) => {
   allWorks.push(newWork);
 };
 
-// //Mettre à jour l'état du bouton "Valider"
-// const updateSubmitButtonState = () => {
-//   const title = document.getElementById('title').value.trim();//On enlève les espaces du title
-//   const categorySelected = document.getElementById('categorySelector').selectedIndex > 0;
-//   const imageLoaded = addPicture.files.length > 0;
-//   console.log('title', title, 'categorySelected', categorySelected, 'imageLoaded', imageLoaded);
-//   console.log('submitButton', modalButton2);
-//   if (title && categorySelected && imageLoaded) {
-//     modalButton2.classList.remove('validerDisabled');
-//     modalButton2.classList.add('valider');
-//     modalButton2.disabled = false;
-//   } else {
-//     modalButton2.classList.add('validerDisabled');
-//     modalButton2.disabled = true;
-//   }
-// }
+//Mettre à jour l'état du bouton "Valider"
+const updateSubmitButtonState = () => {
+  const title = titleInput.value.trim();//On enlève les espaces du title
+  const categorySelected = document.getElementById('categorySelector').selectedIndex > 0;
+  const imageLoaded = addPicture.files.length > 0;
+  console.log('title:', title, 'categorySelected:', categorySelected, 'imageLoaded:', imageLoaded);
+  console.log('modalButton2:', modalButton2);
+  if (title && categorySelected && imageLoaded) {
+    modalButton2.classList.remove('buttonDisabled');
+    modalButton2.classList.add('buttonEnabled');
+    modalButton2.disabled = false;
+  } else {
+    modalButton2.classList.add('buttonDisabled');
+    modalButton2.disabled = true;
+  }
+}
 
-// updateSubmitButtonState();
+// Ajoutez des écouteurs d'événements pour surveiller les modifications des champs de formulaire
+titleInput.addEventListener('input', updateSubmitButtonState);
+categorySelector.addEventListener('change', updateSubmitButtonState);
+addPicture.addEventListener('change', updateSubmitButtonState);
+
+updateSubmitButtonState();
