@@ -129,17 +129,29 @@ table {
 }
 /** end reset css**/
 body {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 10%;
-  font-family: "Work Sans";
-  font-size: 14px;
   background-color: #fffef8;
 }
 header {
   display: flex;
   justify-content: space-between;
-  padding: 50px 0;
+  margin: 30px auto;
+  font-family: "Work Sans";
+  font-size: 14px;
+  max-width: 1440px;
+  width: 80%;
+}
+
+html {
+  margin: 0 auto;
+  max-width: 2560px;
+  background-color: white;
+}
+
+main {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 10%;
+  font-family: "Work Sans";
 }
 
 section {
@@ -148,6 +160,12 @@ section {
 
 .active-page {
   font-weight: bold;
+}
+
+hr {
+  width: 100%;
+  height: 100%;
+  margin: 50px 0 40px;
 }
 
 h1 {
@@ -181,6 +199,11 @@ nav li {
   font-size: 1.2em;
 }
 
+nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
 li:hover {
   color: #b1663c;
 }
@@ -188,6 +211,7 @@ li:hover {
 #introduction {
   display: flex;
   align-items: center;
+  gap: 75px;
 }
 #introduction figure {
   flex: 1;
@@ -195,7 +219,7 @@ li:hover {
 #introduction img {
   display: block;
   margin: auto;
-  width: 80%;
+  width: 100%;
 }
 
 #introduction article {
@@ -219,6 +243,7 @@ li:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 40px;
 }
 
 .edit {
@@ -250,6 +275,8 @@ li:hover {
   background-color: black;
   width: 100%;
   height: 0;
+  font-family: "Work Sans";
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -297,7 +324,7 @@ li:hover {
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  width: 800px;
+  width: 630px;
   max-width: calc(100vw - 20px);
   max-height: calc(100vh - 20px);
   padding: 20px 100px;
@@ -334,12 +361,13 @@ li:hover {
   height: 100px;
 }
 
-#titlemodal {
+#titlemodal2 {
   font-family: Work Sans;
   font-weight: 400;
-  font-size: 29px;
+  font-size: 36px;
   color: #000000;
   line-height: 30.5px;
+  margin: 35px 0 0 0 !important;
 }
 
 .modal-wrapper button {
@@ -352,12 +380,16 @@ li:hover {
   position: relative;
   top: 10px;
   left: -55%;
+  background-color: transparent;
+  border: none;
 }
 
 .js-modal-close {
   position: relative;
   top: 26px;
   left: 55%;
+  background-color: transparent;
+  border: none;
 }
 
 .modal-wrapper a:hover {
@@ -392,7 +424,7 @@ li:hover {
   width: 100%;
   height: 100%;
   position: absolute;
-  inset-area: center;
+  place-content: center;
 }
 
 .logoDelete-style {
@@ -410,14 +442,17 @@ li:hover {
 .modale-button {
   font-family: "Syne";
   font-weight: 700;
+  font-size: 16px;
   color: white;
   background-color: #1d6154;
   margin: 2em auto;
   width: 250px;
+  height: 45px;
   text-align: center;
   border-radius: 60px;
   line-height: 43px;
   text-decoration: none;
+  z-index: 2;
 }
 
 #addFileBtn {
@@ -426,10 +461,11 @@ li:hover {
   justify-content: center;
   align-items: center;
   background-color: #e8f1f6;
-  width: 420px;
-  height: 169px;
+  width: 100%;
+  height: 185px;
   border-radius: 3px;
-  margin: 100px;
+  margin: 50px;
+  position: relative;
 }
 /*Filters*/
 
@@ -490,12 +526,121 @@ li:hover {
   flex-direction: column;
 }
 
+/* Add photo modale */
+
+#addFileForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#modale-button2 {
+  line-height: 43px;
+  text-decoration: none;
+  z-index: 2;
+  transition: all 0.5s;
+}
+
+.valider {
+  border-radius: 60px;
+  background-color: #1d6154;
+  color: white;
+  font-size: 14px;
+  margin-top: 30px;
+  margin-left: 220px;
+  width: 237px;
+  height: 36px;
+}
+.validerDisabled {
+  background-color: #a7a7a7;
+  cursor: not-allowed;
+}
+
+label {
+  font-family: sans-serif;
+  font-size: 1rem;
+  padding-right: 10px;
+}
+
+#preview {
+  width: 50%;
+  height: 100%;
+  background-color: #e8f1f7;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  object-fit: contain;
+}
+
+#preview img {
+  object-fit: contain;
+  height: 100%;
+}
+
+label[for="title"] {
+  font-family: "Work Sans";
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 16.42px;
+  color: #3d3d3d;
+  padding: 0 480px 25px 0px;
+}
+
+label[for="categorySelector"] {
+  font-family: "Work Sans";
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 16.42px;
+  color: #3d3d3d;
+  padding: 25px 435px 25px 0px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 96%;
+  height: 50px;
+  box-shadow: 0px 4px 14px 0px #00000017;
+  border: none;
+}
+
+select {
+  width: 100%;
+  height: 70px;
+  box-shadow: 0px 4px 14px 0px #00000017;
+  font-size: 0.9rem;
+  padding: 2px 5px;
+  border: none;
+}
+
+#addFile {
+  display: none;
+}
+
+.file-upload {
+  height: 35px;
+  border-radius: 50px;
+  color: #306685;
+  font-weight: 500;
+  margin-bottom: 15px;
+  padding: 10px 35px;
+  box-sizing: border-box;
+  position: relative;
+  background-color: #cbd6dc;
+}
+
+.uploadImg {
+  scale: 5.5;
+  color: #cbd6dc;
+  padding: 35px;
+}
+
 #contact input {
   height: 50px;
   font-size: 1.2em;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
   margin: 2em 0 1em 0;
 }
@@ -512,12 +657,20 @@ li:hover {
 input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
+  font-size: 18px;
   color: white;
   background-color: #1d6154;
-  margin: 2em auto;
+  margin: 45px auto 50px;
   width: 250px;
   text-align: center;
   border-radius: 60px;
+  border-color: transparent;
+}
+
+footer {
+  font-family: "Work Sans";
+  padding-top: 10px;
+  background-color: white;
 }
 
 footer nav ul {

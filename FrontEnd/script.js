@@ -72,6 +72,13 @@ const filterDisplay = async () => {
       button.setAttribute("data-category", category.id);
       catContainer.appendChild(button);
     }
+
+    // Ajout de la classe active-filter au bouton "Tous" sans itérateur
+    const firstButton = catContainer.querySelector('button[data-category="0"]');
+    if (firstButton) {
+      firstButton.classList.add("active-filter");
+    }
+
   } catch {
     console.error("Il y a une erreur");
   }

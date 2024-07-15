@@ -23,13 +23,14 @@ const logIn = async () => {
     });
     // Conversion de la reponse en format json
     const data = await response.json();
-    // On enregistre la valeur de data avec la clé "token" dans le localStorage
-    localStorage.setItem("token", JSON.stringify(data.token));
+    
+    if (response.ok) {
+      // On enregistre la valeur de data avec la clé "token" dans le localStorage
+      //le token est enregistré quand la réponse est OK
+    localStorage.setItem("token", data.token);
     // On vérifie le token
     console.log(data.token);
-
-    // En cas de succès
-    if (response.ok) {
+    // En cas de succès, on affiche un message de confirmation
       // Message de confirmation
       console.log("Félicitation, vous êtes connecté !", data);
       // Redirection vers la page d'accueil
