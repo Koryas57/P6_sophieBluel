@@ -1,0 +1,6 @@
+ <select name="category" id="categorySelector">
+              <option value=""></option>
+              <option value="Hôtels & Restaurants">Hôtels & Restaurants</option>
+              <option value="Appartements">Appartements</option>
+              <option value="Objets">Objets</option>
+            </select>
