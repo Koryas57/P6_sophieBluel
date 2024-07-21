@@ -13,6 +13,7 @@ const modalButton2 = document.querySelector("#modale-button2");
 //URL de base qui est commune
 const BASE_URL = 'http://localhost:5678/api/';
 
+
 // Méthode créée pour gérer le click sur l'icone de suppression de projet 
 const handleLogoElementClick = (event) => {
 
@@ -61,9 +62,9 @@ const modalGalleryDisplay = async () => {
 // Dès l'execution de la fonction ,nous executons le script suivant =>
 
 modalGalleryDisplay().then(() => {
-  const logoElements = document.querySelectorAll(".logoDelete-style");//Je vais sélectionner toutes les icones trash(poubelles)
+  const logoElements = document.querySelectorAll(".logoDelete-style");//Je vais sélectionner toutes les icones poubelles
   logoElements.forEach((logoElement) => {
-    logoElement.addEventListener("click", handleLogoElementClick);//Pour chaque élément j'appelle handleLogoElementClick pour supprimer le work cliqué
+    logoElement.addEventListener("click", handleLogoElementClick);//Pour chaque élément j'appelle handleLogoElementClick pour supprimer le projet cliqué
   });
 });
 
@@ -111,6 +112,7 @@ document.getElementById("modal2Link").addEventListener("click", function () {
     .querySelector(".modal-wrapper2")
     .addEventListener("click", stopPropagation);
   imgPreview.style.display = "none";
+  selectCategories();
 });
 
 modalPrev.addEventListener("click", function () {
@@ -125,7 +127,7 @@ addPicture.addEventListener("change", async function (event) {
   const selectedFile = event.target.files[0];
   const ACCEPTED_EXTENSIONS = ["png", "jpg", "jpeg"];
   const fileName = selectedFile.name;
-  const extension = fileName.split(".").pop().toLowerCase(); // Pour extraire l'extension ou le type de fichier
+  const extension = fileName.split(".").pop().toLowerCase(); // Pour extraire l'extension du fichier
   if (selectedFile && selectedFile.size <= 4 * 1024 * 1024 && ACCEPTED_EXTENSIONS.includes(extension)) { // 4MB max
     const reader = new FileReader(); /* permet à des applications web de lire le contenu de fichiers de facon asynchrone */
     reader.onload = async function (e) { /* permet d'appeler le chargement */

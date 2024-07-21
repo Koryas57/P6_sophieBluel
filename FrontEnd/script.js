@@ -11,6 +11,7 @@ const titleSpacing = document.querySelector("#portfolio h2");
 let allWorks = [];
 // Création d'un tableau pour accueillir les catégories
 let categoryTab = [];
+const selectedOption = document.querySelector("#categorySelector");
 
 // ***** AFFICHAGE DYNAMIQUE DE LA GALLERIE *****
 
@@ -85,6 +86,21 @@ const filterDisplay = async () => {
 };
 
 filterDisplay();
+
+// Méthode pour afficher les catégories
+const selectCategories = () => {
+  selectedOption.innerHTML = "";
+  let option = document.createElement("option")
+  selectedOption.appendChild(option);
+  const categoryWithoutTous = categoryTab.filter((cat) => cat.id !== 0);
+  categoryWithoutTous.forEach((category) => {
+    option = document.createElement("option");
+    option.value = category.name;
+    option.innerText = category.name;
+    option.id = category.id;
+    selectedOption.appendChild(option);
+  })
+}
 
 // ***** GESTION DU CLIC VIA UN ECOUTEUR D'EVENEMENT *****
 
