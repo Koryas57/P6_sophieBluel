@@ -1,20 +1,18 @@
 // On pointe nos variable vers les éléments que l'on utilisera plus tard
 const modalGallery = document.querySelector(".modal-gallery");
-let modalAllWorks = [];
 const modalPrev = document.querySelector(".js-modal-prev");
 const modalClose = document.querySelector(".js-modal-close");
-const token = localStorage.getItem("token");
 const imgPreview = document.querySelector("#preview");
 const fileUpload = document.querySelector(".file-upload");
-// Verifier répétitions des deux prochaines const
 const titleInput = document.getElementById('title');
 const categorySelector = document.getElementById('categorySelector');
 const modalButton2 = document.querySelector("#modale-button2");
-//URL de base qui est commune
 const BASE_URL = 'http://localhost:5678/api/';
+const token = localStorage.getItem("token");
+let modalAllWorks = [];
 
 
-// Méthode créée pour gérer le click sur l'icone de suppression de projet 
+// Méthode de gestion du clic sur l'icone de suppression de projet 
 const handleLogoElementClick = (event) => {
 
   if (event.target.getAttribute("data-workId")) {
@@ -43,7 +41,7 @@ const modalGalleryDisplay = async () => {
       logoElement.classList.add("fa-trash-can");
       logoElement.classList.add("logoDelete-style");
       lienLogo.classList.add("lien-logo");
-      logoElement.setAttribute("data-workId", modalAllWorks[i].id);//J'ai mis cet attribut data-workId directement sur l'icone trash qui supprime un work
+      logoElement.setAttribute("data-workId", modalAllWorks[i].id);// J'ajoute un attribut data-workId sur chaque icone de manière à pouvoir les identifier
       figElement.appendChild(imgElement);
       figElement.appendChild(logoElement);
       logoElement.appendChild(lienLogo);
@@ -62,9 +60,9 @@ const modalGalleryDisplay = async () => {
 // Dès l'execution de la fonction ,nous executons le script suivant =>
 
 modalGalleryDisplay().then(() => {
-  const logoElements = document.querySelectorAll(".logoDelete-style");//Je vais sélectionner toutes les icones poubelles
+  const logoElements = document.querySelectorAll(".logoDelete-style");
   logoElements.forEach((logoElement) => {
-    logoElement.addEventListener("click", handleLogoElementClick);//Pour chaque élément j'appelle handleLogoElementClick pour supprimer le projet cliqué
+    logoElement.addEventListener("click", handleLogoElementClick); // Pour chaque élément j'appelle la méthode de gestion du clic pour supprimer le projet cliqué
   });
 });
 
@@ -120,9 +118,10 @@ modalPrev.addEventListener("click", function () {
   document.querySelector(".modal-wrapper2").style.display = "none";
 });
 
-// Au clic sur Ajouter une photo
+
 const addPicture = document.querySelector("#addFileBtn input")
-// Pour ajouter une image
+
+// Gestion des conditions et du style de l'input de type file
 addPicture.addEventListener("change", async function (event) {
   const selectedFile = event.target.files[0];
   const ACCEPTED_EXTENSIONS = ["png", "jpg", "jpeg"];
@@ -141,21 +140,22 @@ addPicture.addEventListener("change", async function (event) {
 });
 
 let form = document.querySelector("#modal2 form");
+
 // Gérer la soumission du formulaire
 form.addEventListener("submit", async function (event) {
   event.preventDefault(); // Empêcher la soumission par défaut
   await uploadImage(); // Appel de la fonction pour upload le fichier
 });
-// Appel de l'API
+
 // Pour transformer l'image en blob (binary large object) afin de faciliter le téléversement.
 const dataURLtoBlob = async (dataurl) => {
   const response = await fetch(dataurl);
   const blob = await response.blob();
   return blob;
 };
-// Méthode pour télécharger l'image
+
+// Méthode pour téléverser et convertir l'image en binary large object
 const uploadImage = async () => {
-  //il a été fait à plusieurs reprises, on peut le simplifier à voir demain dimanche
   if (!token) {
     alert("Vous devez être connecté pour effectuer cette action");
     return;
@@ -169,8 +169,8 @@ const uploadImage = async () => {
   reader.onloadend = async function (event) {
     try {
       const base64String = event.target.result;
-      /*On convertit l'image en blob qui est plus avantageux entre autres,  réduit l'utilisation de la mémoire
-      et améliore les performances de l'applications etc */
+      /* On convertit l'image en blob qui est plus avantageux entre autres,  réduit l'utilisation de la mémoire
+      et améliore les performances de l'application etc */
       const blobImg = await dataURLtoBlob(base64String);
       console.log("blobImg", blobImg);
       const formData = new FormData();
@@ -186,6 +186,7 @@ const uploadImage = async () => {
   reader.readAsDataURL(selectedFile);
 };
 
+// Méthode pour envoyer le formData à l'API
 const postDataToBdd = async (token, formData, title, categoryName) => {
   console.log("token", token);
   const urlPostWork = `${BASE_URL}works`;
@@ -203,15 +204,14 @@ const postDataToBdd = async (token, formData, title, categoryName) => {
     const responseData = await response.json();
     console.log('Successful response:', responseData);
     addToWorksData(responseData, categoryName);
-    gallery.innerHTML = ""; // Vider le contenu de la galerie
-    //Rafraichir la galérie
+    gallery.innerHTML = "";
     galleryDisplay();
-    // Masquer la galerie ajout photo
   } catch (error) {
     console.error('Erreur lors de la connexion:', error);
   }
 };
-// Ajouter les données à la galerie
+
+// Ajout des données à la galerie
 const addToWorksData = (data, optionName) => {
   newWork = {};
   newWork.title = data.title;
@@ -221,9 +221,9 @@ const addToWorksData = (data, optionName) => {
   allWorks.push(newWork);
 };
 
-//Mettre à jour l'état du bouton "Valider"
+// Mise à jour de l'état du bouton "Valider" en fonction du formulaire
 const updateSubmitButtonState = () => {
-  const title = titleInput.value.trim();//On enlève les espaces du title
+  const title = titleInput.value.trim(); // On enlève les espaces du title
   const categorySelected = document.getElementById('categorySelector').selectedIndex > 0;
   const imageLoaded = addPicture.files.length > 0;
   console.log('title:', title, 'categorySelected:', categorySelected, 'imageLoaded:', imageLoaded);
@@ -238,7 +238,7 @@ const updateSubmitButtonState = () => {
   }
 }
 
-// Ajoutez des écouteurs d'événements pour surveiller les modifications des champs de formulaire
+// Ajout des écouteurs d'événements pour surveiller les modifications des champs de formulaire
 titleInput.addEventListener('input', updateSubmitButtonState);
 categorySelector.addEventListener('change', updateSubmitButtonState);
 addPicture.addEventListener('change', updateSubmitButtonState);

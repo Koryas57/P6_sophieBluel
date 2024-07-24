@@ -15,7 +15,7 @@ const logIn = async () => {
         "Content-Type": "application/json",
       },
       /* Définition de la charge utile de la requête
-        /!\ Cet objet doit être converti en une chaîne de caractères au format JSON pour être transmis dans le body de la requête */
+        /!\ Cet objet doit être converti en une chaîne de caractères au format JSON pour être transmis au body de la requête */
       body: JSON.stringify({
         email,
         password,
@@ -23,15 +23,13 @@ const logIn = async () => {
     });
     // Conversion de la reponse en format json
     const data = await response.json();
-    
+
     if (response.ok) {
       // On enregistre la valeur de data avec la clé "token" dans le localStorage
-      //le token est enregistré quand la réponse est OK
-    localStorage.setItem("token", data.token);
-    // On vérifie le token
-    console.log(data.token);
-    // En cas de succès, on affiche un message de confirmation
-      // Message de confirmation
+      localStorage.setItem("token", data.token);
+      // On vérifie le token
+      console.log(data.token);
+      // En cas de succès, on affiche un message de confirmation
       console.log("Félicitation, vous êtes connecté !", data);
       // Redirection vers la page d'accueil
       window.location.href = "index.html";

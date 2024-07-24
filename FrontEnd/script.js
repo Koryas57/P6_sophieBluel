@@ -1,7 +1,7 @@
 // Conteneur parent
 const gallery = document.querySelector(".gallery");
 const catContainer = document.querySelector(".filters");
-// Log
+// Lien de login
 const log = document.querySelector("#log a");
 // Mode édition
 const modeEdition = document.querySelector(".edition");
